@@ -2,4 +2,5 @@ name: BoltTowny
 version: '${version}'
 main: org.popcraft.bolttowny.BoltTowny
 api-version: 1.19
+folia-supported: true
 depend: [ Bolt, Towny ]
