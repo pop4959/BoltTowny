@@ -14,7 +14,9 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.popcraft.bolt.BoltAPI;
 import org.popcraft.bolt.protection.Protection;
@@ -36,6 +38,7 @@ public final class BoltTowny extends JavaPlugin implements Listener {
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
+        getServer().getPluginManager().registerEvents(this, this);
         bolt.registerPlayerSourceResolver((source, uuid) -> {
             if (!SourceTypes.TOWN.equals(source.getType())) {
                 return false;
@@ -57,6 +60,7 @@ public final class BoltTowny extends JavaPlugin implements Listener {
     public void onDisable() {
         this.bolt = null;
         this.towny = null;
+        HandlerList.unregisterAll((Plugin) this);
     }
 
     @EventHandler
